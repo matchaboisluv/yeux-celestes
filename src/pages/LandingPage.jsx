@@ -14,7 +14,7 @@ function LandingPage(){
                 </div>
                 
             </main>
-            <Footer/>
+            <Footer className="inset-x-0 bottom-0"/>
         </div>
     )
 }
