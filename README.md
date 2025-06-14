@@ -18,8 +18,6 @@ A modern vintage-inspired photobooth web application that captures the nostalgic
 - **Camera API**: WebRTC getUserMedia
 - **Image Processing**: HTML5 Canvas API
 
---- 
-
 ## Getting Started
 
 ### Prerequisites
@@ -27,24 +25,24 @@ A modern vintage-inspired photobooth web application that captures the nostalgic
 - npm or yarn package manager
 
 ### Installation
-1. Clone the repository
+1. **Clone the repository**
 ```bash
 git clone https://github.com/matchaboisluv/yeux-celestes
 cd yeux-celestes
 ```
-2. Install dependencies
+2. **Install dependencies**
 ```bash
 npm install
 ```
-4. Start the development server
+4. **Start the development server**
 ```bash
 npm run dev
 ```
 Open your browser and navigate to [http://localhost:5173](http://localhost:5173).
 
 ## Usage
-1. Landing Page - Click "Get Started" to begin your photobooth session.
-2. Camera Setup - Allow camera permissions when prompted.
-3. Filter Selection - Choose your desired filter from the sidebar.
-4. Capture Photos - Click "Capture" to start the 3-photo sequence.
-5. Review & Save - View your photo strip and click "Save" to download.
+1. **Landing Page** - Click "Get Started" to begin your photobooth session.
+2. **Camera Setup** - Allow camera permissions when prompted.
+3. **Filter Selection** - Choose your desired filter from the sidebar.
+4. **Capture Photos** - Click "Capture" to start the 3-photo sequence.
+5. **Review & Save** - View your photo strip and click "Save" to download.
