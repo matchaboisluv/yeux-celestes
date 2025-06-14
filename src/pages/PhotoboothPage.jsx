@@ -1,15 +1,18 @@
-import React, { useRef } from 'react';
-import { Camera } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { Camera, Download } from 'lucide-react';
 import yeuxcelestes2 from '../assets/images/yeuxcelestes2.png';
 import Footer from '../components/Footer';
 import { useCamera } from '../hooks/useCamera';
 import { usePhotoSequence } from '../hooks/usePhotoSequence';
 import { FILTERS, getFilterById } from '../utils/filters';
+import ResultPage from './ResultPage';
 
 function PhotoboothPage() {
     const camera = useCamera();
     const photoSequence = usePhotoSequence(3);
     const canvasRef = useRef(null);
+    const [showResults, setShowResults] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
     const handleStartCapture = () => {
         if (camera.videoRef.current) {
@@ -19,8 +22,39 @@ function PhotoboothPage() {
 
     const currentFilterStyle = getFilterById(photoSequence.currentFilter).cssFilter;
 
+    const handleNext = () => {
+        setIsTransitioning(true);
+        setTimeout(() => {
+            setShowResults(true);
+            setIsTransitioning(false);
+        }, 800);
+    };
+
+    const handleBackToPhotobooth = () => {
+        setShowResults(false);
+        photoSequence.resetSequence();
+    };
+
+    if (showResults) {
+        return (
+            <ResultPage 
+                capturedPhotos={photoSequence.capturedPhotos}
+                onBack={handleBackToPhotobooth}
+            />
+        );
+    }
+
     return (
+        
         <div className="flex flex-col min-h-screen w-full">
+            {isTransitioning && (
+                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+                    <div className="text-white font-CooperHewitt text-2xl animate-pulse">
+                        Preparing your photos...
+                    </div>
+                </div>
+            )}
+            
             <main className="flex-grow flex flex-col items-center justify-start relative pb-4 md:pb-6">
                 <canvas ref={photoSequence.canvasRef} className="hidden"/>
 
@@ -76,30 +110,45 @@ function PhotoboothPage() {
                                 </div>
 
                                 {/* Capture Controls */}
-                                <div className="text-center mt-3 md:mt-6">
-                                    <button
-                                        onClick={handleStartCapture}
-                                        disabled={
-                                            !camera.stream ||
-                                            photoSequence.isCapturing ||
-                                            photoSequence.isSequenceComplete
-                                        }
-                                        className="mr-3 bg-transparent border-2 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-base lg:text-base xl:text-base font-medium hover:bg-white hover:text-red-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >
-                                        {photoSequence.isCapturing
-                                            ? 'Capturing...'
-                                            : photoSequence.isSequenceComplete
-                                            ? 'Complete'
-                                            : 'Capture'}
-                                    </button>
+                                <div className="text-center mt-3 md:mt-6 space-x-4">
+                                    {/* While capturing */}
+                                    {photoSequence.isCapturing && (
+                                        <button
+                                        disabled
+                                        className="bg-transparent border-2 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-base lg:text-base xl:text-base font-medium opacity-70 cursor-wait"
+                                        >
+                                        Capturing...
+                                        </button>
+                                    )}
 
-                                    {photoSequence.capturedPhotos.length > 0 && (
+                                    {/* Before capturing (initial state) */}
+                                    {!photoSequence.isCapturing && !photoSequence.isSequenceComplete && (
+                                        <button
+                                        onClick={handleStartCapture}
+                                        disabled={!camera.stream}
+                                        className="bg-transparent border-2 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-base lg:text-base xl:text-base font-medium hover:bg-white hover:text-red-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >
+                                        Capture
+                                        </button>
+                                    )}
+
+                                    {/* After capturing is complete */}
+                                    {!photoSequence.isCapturing && photoSequence.isSequenceComplete && (
+                                        <>
                                         <button
                                             onClick={photoSequence.resetSequence}
                                             className="border-2 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-base lg:text-base xl:text-base font-medium hover:bg-white hover:text-black transition-all duration-300"
                                         >
                                             Reset
                                         </button>
+
+                                        <button
+                                            onClick={handleNext}
+                                            className="bg-white text-red-800 border-2 border-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-base lg:text-base xl:text-base font-medium hover:bg-red-800 hover:text-white transition-all duration-300"
+                                        >
+                                            Next
+                                        </button>
+                                        </>
                                     )}
                                 </div>
                             </div>
