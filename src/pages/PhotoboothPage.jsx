@@ -46,7 +46,7 @@ function PhotoboothPage() {
 
     return (
         
-        <div className="flex flex-col min-h-screen w-full">
+        <div className="min-h-screen flex flex-col">
             {isTransitioning && (
                 <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
                     <div className="text-white font-CooperHewitt text-2xl animate-pulse">
@@ -55,7 +55,7 @@ function PhotoboothPage() {
                 </div>
             )}
             
-            <main className="flex-grow flex flex-col items-center justify-start relative pb-4 md:pb-6">
+            <main className="flex-1 flex flex-col items-center justify-start relative pb-4 md:pb-6">
                 <canvas ref={photoSequence.canvasRef} className="hidden"/>
 
                 {/* Banner Image */}
@@ -81,7 +81,10 @@ function PhotoboothPage() {
                                         muted
                                         playsInline
                                         className="w-full h-full object-cover"
-                                        style={{ filter: currentFilterStyle }}
+                                        style={{ 
+                                            filter: currentFilterStyle, 
+                                            transform: 'scaleX(-1)'
+                                        }}
                                     />
 
                                     {/* Camera Countdown */}
@@ -198,7 +201,7 @@ function PhotoboothPage() {
                     </div>
                 </div>
             </main>
-            <Footer className="inset-x-0 bottom-0"/>
+            <Footer/>
         </div>
     )
 }
