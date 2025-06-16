@@ -11,8 +11,8 @@ function LandingPage(){
     }
 
     return (
-        <div className="flex flex-col min-h-screen w-full">
-            <main className="flex-grow flex flex-col items-center justify-center relative">
+        <div className="min-h-screen flex flex-col w-full">
+            <main className="flex-1 flex flex-col items-center justify-center relative">
                 <div className="relative max-w-full md:max-w-[65%] lg:max-w-[46%] w-full">
                     <img src={yeuxcelestes} className="w-full h-auto object-contain z-0"/>
                     <button
@@ -24,7 +24,7 @@ function LandingPage(){
                 </div>
                 
             </main>
-            <Footer className="inset-x-0 bottom-0"/>
+            <Footer/>
         </div>
     )
 }
