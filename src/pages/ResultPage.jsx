@@ -13,10 +13,71 @@ function ResultPage({ capturedPhotos = [], onBack }){
       year: 'numeric'
     });
 
+    const processImage = (imageSrc) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          
+          // always use 4:3 aspect ratio for consistent output
+          const targetWidth = 400;
+          const targetHeight = 300;
+          
+          canvas.width = targetWidth;
+          canvas.height = targetHeight;
+          
+          ctx.fillStyle = 'black';
+          ctx.fillRect(0, 0, targetWidth, targetHeight);
+          
+          // calculate dimensions to fit image while maintaining aspect ratio
+          const imgAspect = img.width / img.height;
+          const targetAspect = targetWidth / targetHeight;
+          
+          let drawWidth, drawHeight, drawX, drawY;
+          
+          if (imgAspect > targetAspect) {
+            // image is wider - fit by height
+            drawHeight = targetHeight;
+            drawWidth = drawHeight * imgAspect;
+            drawX = (targetWidth - drawWidth) / 2;
+            drawY = 0;
+          } else {
+            // image is taller - fit by width
+            drawWidth = targetWidth;
+            drawHeight = drawWidth / imgAspect;
+            drawX = 0;
+            drawY = (targetHeight - drawHeight) / 2;
+          }
+          
+          // mirror the image horizontally and draw it
+          ctx.save();
+          ctx.scale(-1, 1);
+          ctx.drawImage(img, -drawX - drawWidth, drawY, drawWidth, drawHeight);
+          ctx.restore();
+          
+          resolve(canvas.toDataURL());
+        };
+        
+        img.onerror = () => {
+          console.error('Failed to load image for processing');
+          resolve(imageSrc); // return original if processing fails
+        };
+        
+        img.src = imageSrc;
+      });
+    };
+
     const handleSave = async () => {
       if (!stripRef.current || capturedPhotos.length === 0) return;
       
       try {
+        const processedPhotos = await Promise.all(
+          capturedPhotos.map(photo => processImage(photo))
+        );
+        
         // canvas to combine all elements
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
@@ -56,9 +117,9 @@ function ResultPage({ capturedPhotos = [], onBack }){
       
         // draw all 3 photo slots (filled or empty)
         for (let i = 0; i < 3; i++) {
-          if (i < capturedPhotos.length) {
+          if (i < processedPhotos.length) {
             try {
-              const img = await loadImage(capturedPhotos[i]);
+              const img = await loadImage(processedPhotos[i]);
               ctx.drawImage(img, photoX, currentY, photoWidth, photoHeight);
             } catch (error) {
               console.error(`Failed to load photo ${i + 1}:`, error);
@@ -120,9 +181,9 @@ function ResultPage({ capturedPhotos = [], onBack }){
     };
 
     return (
-        <div className="flex flex-col min-h-screen w-full">
+        <div className="min-h-screen flex flex-col">
               
-          <main className="flex flex-col items-center flex-grow">
+          <main className="flex-1 flex flex-col items-center">
           
             {/* Banner */}
             <div className="w-full flex justify-center top-0">
@@ -147,6 +208,9 @@ function ResultPage({ capturedPhotos = [], onBack }){
                       src={photo}
                       alt={`Photo ${index + 1}`}
                       className="w-full h-full object-cover"
+                      style={{
+                        transform: 'scaleX(-1)'
+                      }}
                     />
                   </div>
                 ))}
@@ -184,7 +248,7 @@ function ResultPage({ capturedPhotos = [], onBack }){
         
           </main>
 
-          <Footer className="inset-x-0 bottom-0"/>
+          <Footer/>
 
         </div>
     )
