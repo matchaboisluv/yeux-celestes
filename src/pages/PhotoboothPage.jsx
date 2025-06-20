@@ -118,7 +118,7 @@ function PhotoboothPage() {
                                     {photoSequence.isCapturing && (
                                         <button
                                         disabled
-                                        className="bg-transparent border-[1px] md:border-[1px] lg:border-2 xl:border-2 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-base lg:text-base xl:text-base font-medium opacity-70 cursor-wait"
+                                        className="bg-transparent border-[1px] md:border-[1px] lg:border-2 xl:border-2 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-sm lg:text-base xl:text-base font-medium opacity-70 cursor-wait"
                                         >
                                         Capturing...
                                         </button>
@@ -129,7 +129,7 @@ function PhotoboothPage() {
                                         <button
                                         onClick={handleStartCapture}
                                         disabled={!camera.stream}
-                                        className="bg-transparent border-[1px] md:border-[1px] lg:border-2 xl:border-2 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-base lg:text-lg xl:text-xl font-medium hover:bg-white hover:text-red-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
+                                        className="bg-transparent border-[1px] md:border-[1px] lg:border-2 xl:border-2 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-sm lg:text-base xl:text-base font-medium hover:bg-white hover:text-red-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
                                         >
                                         Capture
                                         </button>
@@ -140,14 +140,14 @@ function PhotoboothPage() {
                                         <>
                                         <button
                                             onClick={photoSequence.resetSequence}
-                                            className="border-[1px] md:border-[1px] lg:border-2 xl:border-2 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-base lg:text-base xl:text-base font-medium hover:bg-white hover:text-black transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
+                                            className="border-[1px] md:border-[1px] lg:border-2 xl:border-2 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-sm lg:text-base xl:text-base font-medium hover:bg-white hover:text-black transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
                                         >
                                             Reset
                                         </button>
 
                                         <button
                                             onClick={handleNext}
-                                            className="bg-white text-red-800 border-[1px] md:border-[1px] lg:border-2 xl:border-2 border-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-base lg:text-base xl:text-base font-medium hover:bg-red-800 hover:text-white transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
+                                            className="bg-white text-red-800 border-[1px] md:border-[1px] lg:border-2 xl:border-2 border-white px-4 md:px-6 lg:px-8 py-2 md:py-3 lg:py-3 rounded-full font-CooperHewitt text-xs md:text-sm lg:text-base xl:text-base font-medium hover:bg-red-800 hover:text-white transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
                                         >
                                             Next
                                         </button>
@@ -168,7 +168,7 @@ function PhotoboothPage() {
                                         <button
                                             key={filter.id}
                                             onClick={() => photoSequence.setCurrentFilter(filter.id)}
-                                            className={`w-16 md:w-28 lg:w-32 py-1.5 md:py-2 lg:py-3 rounded-full border-[1px] md:border-[1px] lg:border-2 xl:border-2 font-CooperHewitt text-[0.5rem] md:text-xs lg:text-sm xl:text-base font-medium transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,0,0.5)] ${
+                                            className={`w-16 md:w-28 lg:w-32 py-1.5 md:py-2 lg:py-3 rounded-full border-[1px] md:border-[1px] lg:border-2 xl:border-2 font-CooperHewitt text-[0.5rem] md:text-xs lg:text-sm xl:text-sm font-medium transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,0,0.5)] ${
                                                 photoSequence.currentFilter === filter.id
                                                     ? 'bg-white text-red-800 border-white'
                                                     : 'bg-transparent text-white hover:bg-white hover:text-red-800 border-white'
