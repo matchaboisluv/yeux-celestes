@@ -3,6 +3,8 @@ import { Download, ArrowLeft } from 'lucide-react';
 import yeuxcelestes2 from '../assets/images/yeuxcelestes2.png'
 import yeuxcelestessign from '../assets/images/yeuxcelestessign.png'
 import Footer from '../components/Footer';
+import redcurtain from '../assets/images/redcurtain.png'
+
 
 function ResultPage({ capturedPhotos = [], onBack }){
     const stripRef = useRef(null);
@@ -181,7 +183,9 @@ function ResultPage({ capturedPhotos = [], onBack }){
     };
 
     return (
-        <div className="min-h-screen flex flex-col">
+         <div className="min-h-screen flex flex-col w-full bg-cover bg-center relative overflow-hidden" 
+            style={{ backgroundImage: `url(${redcurtain})` }}
+         >
               
           <main className="flex-1 flex flex-col items-center">
           
@@ -248,7 +252,7 @@ function ResultPage({ capturedPhotos = [], onBack }){
         
           </main>
 
-          <Footer/>
+          {/* <Footer/> */}
 
         </div>
     )
