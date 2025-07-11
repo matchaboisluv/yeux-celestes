@@ -27,12 +27,12 @@ function LandingPage(){
           </div>
 
           <main className="flex-1 flex flex-col items-center justify-center relative z-10 px-4">
-            <div className="flex flex-col items-center max-w-[80%] md:max-w-[65%] lg:max-w-[46%] relative">
-              <img src={gif} className="w-[50%] h-auto m-0 p-0 "/>
-              <img src={yeuxcelesteslanding} className="w-[80%] h-auto m-0 p-0 -translate-x-2 md:-translate-x-4 lg:-translate-x-6"/>
+            <div className="flex flex-col items-center max-w-[90%] md:max-w-[75%] lg:max-w-[55%] pl-8 relative">
+              <img src={gif} className="w-[70%] md:w-[60%] lg:w-[65%] xl:w-[60%] 2xl:w-[40%] h-auto mb-2 pl-1"/>
+              <img src={yeuxcelesteslanding} className="w-full md:w-[90%] lg:w-[95%] xl:w-[95%] 2xl:w-[70%] h-auto m-0 p-0 -translate-x-3.5 md:-translate-x-5 lg:-translate-x-5 xl:-translate-x-6 2xl:-translate-x-10"/>
               <button
                 onClick={handleGetStarted} 
-                className="absolute -bottom-2 md:-bottom-2 lg:-bottom-3 xl:-bottom-2 2xl:bottom-3 px-4 md:px-6 py-1 md:py-2.5 border-[1px] md:border-[1px] lg:border-2 xl:border-2 border-white rounded-full font-CooperHewitt text-[0.6rem] md:text-sm lg:text-sm font-medium text-white transition-all duration-1050 hover:shadow-[0_0_20px_rgba(255,208,0,5)]"
+                className="absolute -bottom-1.5 md:-bottom-3 lg:-bottom-2 xl:-bottom-2 2xl:bottom-4 px-3.5 md:px-7 py-1 md:py-2 border-[1px] md:border-[1px] lg:border-1 xl:border-1 border-white rounded-full font-CooperHewitt text-[0.6rem] md:text-[0.85rem] lg:text-[0.9rem] text-white transition-all duration-1050 hover:shadow-[0_0_10px_rgba(255,208,0,5)]"
               >
                 Begin Experience →
               </button>
