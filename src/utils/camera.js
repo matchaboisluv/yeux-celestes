@@ -24,12 +24,17 @@ export const capturePhotoFromVideo = (videoElement, canvasElement, filter = 'non
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
 
+  ctx.save();
+
   // apply filter
   ctx.filter = filter;
-  ctx.drawImage(video, 0, 0);
+
+  ctx.translate(canvas.width, 0);
+  ctx.scale(-1, 1);
   
-  // reset filter
-  ctx.filter = 'none';
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  ctx.restore();
   
   return canvas.toDataURL('image/png');
 };

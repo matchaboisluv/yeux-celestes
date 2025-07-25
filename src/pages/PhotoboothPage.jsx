@@ -199,9 +199,6 @@ function PhotoboothPage() {
                                             src={photoSequence.capturedPhotos[index]}
                                             alt={`Captured photo ${index + 1}`}
                                             className="w-full h-full object-cover opacity-0 animate-fade-in"
-                                            style={{
-                                                transform: 'scaleX(-1)'
-                                            }}
                                         />
                                         ) : (
                                         <div className="w-full h-full flex items-center justify-center text-gray-500">
