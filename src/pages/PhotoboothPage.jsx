@@ -85,10 +85,10 @@ function PhotoboothPage() {
                                         <button
                                             key={filter.id}
                                             onClick={() => photoSequence.setCurrentFilter(filter.id)}
-                                            className={`w-16 md:w-28 lg:w-32 py-1.5 md:py-2 lg:py-2 rounded-full border-[1px] md:border-[1px] lg:border-1 xl:border-1 font-CooperHewitt text-[0.5rem] md:text-xs lg:text-sm xl:text-sm font-medium transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,0,0.5)] ${
+                                            className={`w-16 md:w-28 lg:w-32 py-1.5 md:py-2 lg:py-2 rounded-full font-CooperHewitt text-[0.5rem] md:text-xs lg:text-sm xl:text-sm font-medium transition-all duration-300 ${
                                                 photoSequence.currentFilter === filter.id
-                                                    ? 'bg-white text-red-800 border-white'
-                                                    : 'bg-transparent text-white hover:bg-white hover:text-red-800 border-white'
+                                                    ? 'text-white shadow-[0_0_10px_rgba(255,255,0,0.5)]'
+                                                    : 'text-white'
                                             }`}
                                         >
                                             {filter.label}
@@ -100,13 +100,13 @@ function PhotoboothPage() {
 
                             <div className="w-full lg:w-[72%]">
                                 <div className="flex flex-col">
-                                    <div className="relative border-black bg-black w-full aspect-[4/3]">
+                                    <div className="relative bg-black w-full aspect-[4/3]">
                                         <video
                                             ref={camera.videoRef}
                                             autoPlay
                                             muted
                                             playsInline
-                                            className="w-full h-full object-cover border-[1px] border-white"
+                                            className="w-full h-full object-cover border-[1px] border-black"
                                             style={{ 
                                                 filter: currentFilterStyle, 
                                                 transform: 'scaleX(-1)'
@@ -144,7 +144,7 @@ function PhotoboothPage() {
                                         {photoSequence.isCapturing && (
                                             <button
                                             disabled
-                                            className="bg-transparent border-[1px] md:border-[1px] lg:border-2 xl:border-1 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-2 lg:py-2 rounded-full font-CooperHewitt text-xs md:text-sm lg:text-base xl:text-base font-medium opacity-70 cursor-wait"
+                                            className="text-white px-4 md:px-6 lg:px-8 py-2 md:py-2 lg:py-2 font-CooperHewitt text-xs md:text-sm lg:text-base xl:text-base font-medium transition-all duration-300"
                                             >
                                             Capturing...
                                             </button>
@@ -155,7 +155,7 @@ function PhotoboothPage() {
                                             <button
                                             onClick={handleStartCapture}
                                             disabled={!camera.stream}
-                                            className="bg-transparent border-[1px] md:border-[1px] lg:border-1 xl:border-1 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-2 lg:py-2 rounded-full font-CooperHewitt text-xs md:text-sm lg:text-base xl:text-base font-medium hover:bg-white hover:text-red-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
+                                            className="text-white px-4 md:px-6 lg:px-8 py-2 md:py-2 lg:py-2 font-CooperHewitt text-xs md:text-sm lg:text-base xl:text-base font-medium rounded-full transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
                                             >
                                             Capture
                                             </button>
@@ -166,14 +166,14 @@ function PhotoboothPage() {
                                             <>
                                             <button
                                                 onClick={photoSequence.resetSequence}
-                                                className="border-[1px] md:border-[1px] lg:border-1 xl:border-1 border-white text-white px-4 md:px-6 lg:px-8 py-2 md:py-2 lg:py-2 rounded-full font-CooperHewitt text-xs md:text-sm lg:text-base xl:text-base font-medium hover:bg-white hover:text-red-800 transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
+                                                className="text-white px-4 md:px-6 lg:px-8 py-2 md:py-2 lg:py-2 font-CooperHewitt text-xs md:text-sm lg:text-base xl:text-base font-medium rounded-full transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
                                             >
                                                 Reset
                                             </button>
 
                                             <button
                                                 onClick={handleNext}
-                                                className="text-white border-[1px] md:border-[1px] lg:border-1 xl:border-1 border-white px-4 md:px-6 lg:px-8 py-2 md:py-2 lg:py-2 rounded-full font-CooperHewitt text-xs md:text-sm lg:text-base xl:text-base font-medium hover:bg-white hover:text-red-800 transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
+                                                className="text-white px-4 md:px-6 lg:px-8 py-2 md:py-2 lg:py-2 font-CooperHewitt text-xs md:text-sm lg:text-base xl:text-base font-medium rounded-full transition-all duration-300 hover:shadow-[0_0_10px_rgba(255,255,0,0.5)]"
                                             >
                                                 Next
                                             </button>
@@ -192,18 +192,21 @@ function PhotoboothPage() {
                                 {[0, 1, 2].map((index) => (
                                     <div
                                         key={index}
-                                        className="bg-black overflow-hidden aspect-[4/3]  border-[1px] border-white"
+                                        className="bg-black overflow-hidden aspect-[4/3]"
                                     >
                                         {photoSequence.capturedPhotos[index] ? (
-                                            <img
-                                                src={photoSequence.capturedPhotos[index]}
-                                                alt={`Captured photo ${index + 1}`}
-                                                className="w-full h-full object-cover"
-                                            />
+                                        <img
+                                            src={photoSequence.capturedPhotos[index]}
+                                            alt={`Captured photo ${index + 1}`}
+                                            className="w-full h-full object-cover opacity-0 animate-fade-in"
+                                            style={{
+                                                transform: 'scaleX(-1)'
+                                            }}
+                                        />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-gray-500">
-                                                <p className="font-CooperHewitt text-xs">Photo {index + 1}</p>
-                                            </div>
+                                        <div className="w-full h-full flex items-center justify-center text-gray-500">
+                                            <p className="font-CooperHewitt text-xs">Photo {index + 1}</p>
+                                        </div>
                                         )}
                                     </div>
                                 ))}

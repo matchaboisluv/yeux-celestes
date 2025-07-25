@@ -201,9 +201,7 @@ function ResultPage({ capturedPhotos = [], onBack }){
             {/* Photo Strip */}
             <div 
               ref={stripRef}
-              className="bg-white p-4 shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-300 mt-[-8rem] sm:mt-[-12rem] md:mt-[-14rem] lg:mt-[-14rem] xl:mt-[-18rem] 2xl:mt-[-24rem]"
-              style={{ width: '250px', minHeight: '600px' }}
-            >
+              className="bg-white p-4 shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-300 mt-[-8rem] sm:mt-[-12rem] md:mt-[-14rem] lg:mt-[-14rem] xl:mt-[-18rem] 2xl:mt-[-24rem] w-[250px] min-height-[600px] animate-fade-in">
               {/* Photos */}
               <div className="space-y-3">
                 {capturedPhotos.map((photo, index) => (

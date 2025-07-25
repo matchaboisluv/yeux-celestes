@@ -28,7 +28,7 @@ function LandingPage(){
 
           <main className="flex-1 flex flex-col items-center justify-center relative z-10 px-4">
             <div className="flex flex-col items-center max-w-[90%] md:max-w-[75%] lg:max-w-[55%] relative">
-              <img src={gif} className="w-[70%] md:w-[60%] lg:w-[65%] xl:w-[60%] 2xl:w-[40%] h-auto mb-2 pl-5"/>
+              <img src={gif} className="w-[50%] md:w-[50%] lg:w-[55%] xl:w-[50%] 2xl:w-[30%] h-auto mb-3 pl-5"/>
               <img src={yeuxcelesteslanding} className="w-full md:w-[90%] lg:w-[95%] xl:w-[95%] 2xl:w-[70%] h-auto m-0 pl-5 -translate-x-3.5 md:-translate-x-5 lg:-translate-x-5 xl:-translate-x-6 2xl:-translate-x-10"/>
               <button
                 onClick={handleGetStarted} 
